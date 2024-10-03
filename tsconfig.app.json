@@ -20,7 +20,9 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "types": ["node", "babel__generator", "babel__template", "babel__traverse", "istanbul-lib-report", "prop-types", "tough-cookie", "yargs-parser"]
   },
   "include": [
     "src"
