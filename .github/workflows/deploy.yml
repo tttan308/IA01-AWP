@@ -21,6 +21,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Configure Git with GitHub Actions account
+        run: |
+          git config --global user.email "${{ secrets.GITHUB_ACTOR }}@users.noreply.github.com"
+          git config --global user.name "${{ github.actor }}"e"
+
       - name: Build project
         run: npm run build
 
