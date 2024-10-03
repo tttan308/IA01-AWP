@@ -2,9 +2,9 @@ import "./App.css";
 
 function App() {
   return (
-    <>
-      <h1 className="font-bold items-center">Hello, world!</h1>
-    </>
+    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      X
+    </button>
   );
 }
 
