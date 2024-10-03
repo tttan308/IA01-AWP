@@ -1,36 +1,31 @@
-name: Deploy React App to GitHub Pages
+name: Deploy React Application
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  build-and-deploy:
+  build_test:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    strategy:
+      matrix:
+        node-version: [16.x]
 
-      - name: Setup Node.js
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Configure Git with GitHub Actions account
+          node-version: ${{ matrix.node-version }}
+      - name: npm ci, build and test
         run: |
-          git config --global user.email "tantran.300803@gmail.com"
-          git config --global user.name "Tan Tran"
-
-      - name: Build project
-        run: npm run build
-
-      - name: Deploy to GitHub Pages
-        run: npm run deploy
-
-      - name: Clean up
-        run: rm -rf build
+          npm ci
+          npm run build --if-present
+      - name: deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./build
