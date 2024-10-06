@@ -19,7 +19,6 @@ function Square({ value, onSquareClick }: SquareProps) {
   );
 }
 
-
 function Board({ xIsNext, squares, onPlay }: BoardProps) {
   function handleClick(i: number) {
     if (calculateWinner(squares) || squares[i]) {
