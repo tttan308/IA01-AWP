@@ -77,7 +77,7 @@ body {
 
 .board-row:after {
   clear: both;
-  content: "";
+  content: '';
   display: table;
 }
 
@@ -91,4 +91,8 @@ body {
 
 .game-info {
   margin-left: 20px;
+}
+
+.highlight {
+  background-color: yellow;
 }
