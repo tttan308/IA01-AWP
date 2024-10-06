@@ -1,6 +1,17 @@
 import { useState } from "react";
 
-function Square({ value, onSquareClick }) {
+interface SquareProps {
+  readonly value: string | null;
+  readonly onSquareClick: () => void;
+}
+
+interface BoardProps {
+  readonly xIsNext: boolean;
+  readonly squares: (string | null)[];
+  readonly onPlay: (squares: (string | null)[]) => void;
+}
+
+function Square({ value, onSquareClick }: SquareProps) {
   return (
     <button className="square" onClick={onSquareClick}>
       {value}
@@ -8,7 +19,8 @@ function Square({ value, onSquareClick }) {
   );
 }
 
-function Board({ xIsNext, squares, onPlay }) {
+
+function Board({ xIsNext, squares, onPlay }: BoardProps) {
   function handleClick(i: number) {
     if (calculateWinner(squares) || squares[i]) {
       return;
