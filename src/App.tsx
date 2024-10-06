@@ -8,9 +8,7 @@ function Square({ value, onSquareClick }) {
   );
 }
 
-
 function Board({ xIsNext, squares, onPlay }) {
-
   function handleClick(i: number) {
     if (calculateWinner(squares) || squares[i]) {
       return;
@@ -18,7 +16,7 @@ function Board({ xIsNext, squares, onPlay }) {
 
     const nextSquares = squares.slice();
 
-    nextSquares[i] = xIsNext ? 'X' : 'O';
+    nextSquares[i] = xIsNext ? "X" : "O";
 
     onPlay(nextSquares);
   }
@@ -26,9 +24,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = "Winner: " + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
   return (
@@ -54,26 +52,25 @@ function Board({ xIsNext, squares, onPlay }) {
 }
 
 function Game() {
-  const [xIsNext, setXIsNext] = useState(true);
   const [history, setHistory] = useState([Array(9).fill(null)]);
-  const currentSquares = history[history.length - 1];
+  const [currentMove, setCurrentMove] = useState(0);
+  const xIsNext = currentMove % 2 === 0;
+  const currentSquares = history[currentMove];
 
   function handlePlay(nextSquares: (string | null)[]) {
-    setHistory([...history, nextSquares]);
-    console.log(history);
-    setXIsNext(!xIsNext);
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
   }
 
   function jumpTo(nextMove: number) {
-    // setHistory(history.slice(0, nextMove + 1));
-    // setXIsNext(nextMove % 2 === 0);
-    console.log(nextMove);
+    setCurrentMove(nextMove);
   }
 
   const moves = history.map((squares, move) => {
-    const desc = move ? 'Go to move #' + move : 'Go to game start';
+    const desc = move ? "Go to move #" + move : "Go to game start";
     return (
-      <li key={`move-${move}-${squares.join('')}`}>
+      <li key={`move-${move}-${squares.join("")}`}>
         <button
           className="bg-gray-500 text-white py-1 px-2 rounded mb-2"
           onClick={() => jumpTo(move)}
