@@ -21,12 +21,16 @@ function Game() {
     const desc = move ? "Go to move #" + move : "Go to game start";
     return (
       <li key={`move-${move}-${squares.join("")}`}>
-        <button
-          className="bg-gray-500 text-white py-1 px-2 rounded mb-2"
-          onClick={() => jumpTo(move)}
-        >
-          {desc}
-        </button>
+        {move === currentMove ? (
+          <span>You are at move #{move}</span>
+        ) : (
+          <button
+            className="bg-gray-500 text-white py-1 px-2 rounded mb-2"
+            onClick={() => jumpTo(move)}
+          >
+            {desc}
+          </button>
+        )}
       </li>
     );
   });
