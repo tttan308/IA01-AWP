@@ -25,7 +25,6 @@ function Board({ xIsNext, squares, onPlay }: BoardProps) {
     : `Next player: ${nextPlayer}`;
   const winningSquares = winnerInfo ? winnerInfo.line : [];
 
-
   const renderSquare = (i: number) => {
     const isWinningSquare = winningSquares.includes(i);
     return (
