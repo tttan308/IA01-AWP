@@ -45,7 +45,7 @@ function Game() {
 
     const desc =
       move === currentMove ? (
-        <div className="bg-red-500 text-white py-1 px-2 rounded mb-2">
+        <div className="text-red-500 py-1 px-2 mb-2">
           You are at move #{move} {getLocation(location)}
         </div>
       ) : (
