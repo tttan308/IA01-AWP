@@ -45,12 +45,9 @@ function Game() {
 
     const desc =
       move === currentMove ? (
-        <button
-          className="bg-red-500 text-white py-1 px-2 rounded mb-2"
-          onClick={() => jumpTo(move)}
-        >
+        <div className="bg-red-500 text-white py-1 px-2 rounded mb-2">
           You are at move #{move} {getLocation(location)}
-        </button>
+        </div>
       ) : (
         <button
           className="bg-gray-500 text-white py-1 px-2 rounded mb-2"
