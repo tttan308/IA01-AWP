@@ -1,11 +1,15 @@
 interface SquareProps {
   readonly value: string | null;
   readonly onSquareClick: () => void;
+  readonly isWinningSquare: boolean;
 }
 
-function Square({ value, onSquareClick }: SquareProps) {
+function Square({ value, onSquareClick, isWinningSquare }: SquareProps) {
   return (
-    <button className="square" onClick={onSquareClick}>
+    <button
+      className={`square ${isWinningSquare ? "highlight" : ""}`}
+      onClick={onSquareClick}
+    >
       {value}
     </button>
   );
