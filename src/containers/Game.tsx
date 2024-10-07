@@ -10,7 +10,10 @@ function Game() {
   const currentSquares = history[currentMove];
 
   const handlePlay = (nextSquares: Array<string | null>) => {
-    setHistory((prevHistory) => [...prevHistory.slice(0, currentMove + 1), nextSquares]);
+    setHistory((prevHistory) => [
+      ...prevHistory.slice(0, currentMove + 1),
+      nextSquares,
+    ]);
     setCurrentMove((prevMove) => prevMove + 1);
   };
 
@@ -23,31 +26,39 @@ function Game() {
   };
 
   const moves = history.map((squares, move) => {
-    if (move === 0) return (
-      <button key="move-0" className="bg-gray-500 text-white py-1 px-2 rounded mb-2" onClick={() => jumpTo(0)}>
-        Go to game start
-      </button>
-    );
+    if (move === 0)
+      return (
+        <button
+          key="move-0"
+          className="bg-gray-500 text-white py-1 px-2 rounded mb-2"
+          onClick={() => jumpTo(0)}
+        >
+          Go to game start
+        </button>
+      );
 
     const prevSquares = history[move - 1];
-    const location = squares.findIndex((square, i) => square !== prevSquares[i]);
+    const location = squares.findIndex(
+      (square, i) => square !== prevSquares[i],
+    );
     if (location === -1) return null;
 
-    const desc = move === currentMove ? (
-      <button
-        className="bg-red-500 text-white py-1 px-2 rounded mb-2"
-        onClick={() => jumpTo(move)}
-      >
-        You are at move #{move} {getLocation(location)}
-      </button>
-    ) : (
-      <button
-        className="bg-gray-500 text-white py-1 px-2 rounded mb-2"
-        onClick={() => jumpTo(move)}
-      >
-        Go to move #{move} {getLocation(location)}
-      </button>
-    );
+    const desc =
+      move === currentMove ? (
+        <button
+          className="bg-red-500 text-white py-1 px-2 rounded mb-2"
+          onClick={() => jumpTo(move)}
+        >
+          You are at move #{move} {getLocation(location)}
+        </button>
+      ) : (
+        <button
+          className="bg-gray-500 text-white py-1 px-2 rounded mb-2"
+          onClick={() => jumpTo(move)}
+        >
+          Go to move #{move} {getLocation(location)}
+        </button>
+      );
 
     return <li key={`move-${move}-${squares.join("")}`}>{desc}</li>;
   });
