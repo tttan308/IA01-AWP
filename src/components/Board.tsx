@@ -18,7 +18,7 @@ function Board({ xIsNext, squares, onPlay }: BoardProps) {
 
   const winnerInfo = calculateWinner(squares);
   const nextPlayer = xIsNext ? "X" : "O";
-  const isDraw = squares.every(square => square !== null) && !winnerInfo;
+  const isDraw = squares.every((square) => square !== null) && !winnerInfo;
 
   const getStatus = () => {
     if (winnerInfo) return `Winner: ${winnerInfo.winner}`;
@@ -41,9 +41,9 @@ function Board({ xIsNext, squares, onPlay }: BoardProps) {
   return (
     <>
       <div className="status">{getStatus()}</div>
-      {[0, 1, 2].map(row => (
+      {[0, 1, 2].map((row) => (
         <div key={row} className="board-row">
-          {[0, 1, 2].map(col => renderSquare(row * 3 + col))}
+          {[0, 1, 2].map((col) => renderSquare(row * 3 + col))}
         </div>
       ))}
     </>
